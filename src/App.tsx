@@ -197,7 +197,7 @@ function App() {
         ref={sandbox}
       ></div>
       <div id="interface">
-        <div id="zoom">
+        <div id="zoom" className="interface-content">
           <button
             onClick={() => {
               zoom(false);

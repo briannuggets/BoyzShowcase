@@ -49,12 +49,23 @@ button {
     transform: translate(-50%, -50%);
     content: "X";
   }
+  &:hover {
+    cursor: grab;
+  }
+  &:active {
+    cursor: grabbing;
+  }
 }
 
 #interface {
   @include absoluteCenter();
   width: 100vw;
   height: 100vh;
+  pointer-events: none;
+}
+
+.interface-content {
+  pointer-events: all;
 }
 
 #zoom {
