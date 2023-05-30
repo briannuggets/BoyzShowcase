@@ -70,8 +70,28 @@ button {
     background-color: white;
     @include flexCenter();
     transition: 0.3s ease-out;
+    position: relative;
     &:hover {
       background-color: rgb(190, 190, 190);
     }
+  }
+  button.active {
+    background-color: rgb(190, 190, 190);
+  }
+  button::before {
+    @include flexCenter();
+    content: "1";
+    position: absolute;
+    top: -0.75rem;
+    left: -0.75rem;
+    width: 1.5rem;
+    height: 1.5rem;
+    border-radius: 50%;
+    border: 1px solid black;
+    border-style: dashed;
+    background-color: white;
+  }
+  button:nth-child(2)::before {
+    content: "2";
   }
 }

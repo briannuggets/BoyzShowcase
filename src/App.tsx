@@ -15,7 +15,6 @@ function App() {
     sandbox.current.dataset.initialy = e.clientY.toString();
     setIsDragging(true);
   });
-
   window.addEventListener("touchstart", (e) => {
     if (sandbox.current === null) {
       return;
@@ -27,7 +26,7 @@ function App() {
   });
 
   // On drag end
-  window.addEventListener("mouseup", (e) => {
+  window.addEventListener("mouseup", () => {
     if (sandbox.current === null) {
       return;
     }
@@ -36,8 +35,7 @@ function App() {
     sandbox.current.dataset.currenty = sandbox.current.dataset.dy || "0";
     setIsDragging(false);
   });
-
-  window.addEventListener("touchend", (e) => {
+  window.addEventListener("touchend", () => {
     if (sandbox.current === null) {
       return;
     }
@@ -161,13 +159,30 @@ function App() {
     );
   };
 
-  // Zoom keyboard shortcut
+  // Zoom keyboard shortcut with on-press indicator
+  const zoomInRef = useRef<HTMLButtonElement>(null);
+  const zoomOutRef = useRef<HTMLButtonElement>(null);
   window.onkeydown = (e) => {
+    if (zoomInRef.current === null || zoomOutRef.current === null) {
+      return;
+    }
+
+    // Light up button on key press
     if (e.key === "1" || e.key === "-") {
+      zoomOutRef.current.classList.add("active");
       zoom(false);
     } else if (e.key === "2" || e.key === "=") {
+      zoomInRef.current.classList.add("active");
       zoom(true);
     }
+  };
+  window.onkeyup = () => {
+    if (zoomInRef.current === null || zoomOutRef.current === null) {
+      return;
+    }
+    // Remove button light on key release
+    zoomOutRef.current.classList.remove("active");
+    zoomInRef.current.classList.remove("active");
   };
 
   return (
@@ -184,18 +199,18 @@ function App() {
       <div id="interface">
         <div id="zoom">
           <button
-            id="zoom-out"
             onClick={() => {
               zoom(false);
             }}
+            ref={zoomOutRef}
           >
             <CiZoomOut size={25} />
           </button>
           <button
-            id="zoom-in"
             onClick={() => {
               zoom(true);
             }}
+            ref={zoomInRef}
           >
             <CiZoomIn size={25} />
           </button>
