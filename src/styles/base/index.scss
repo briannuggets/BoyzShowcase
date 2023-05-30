@@ -10,11 +10,13 @@
 }
 
 html {
-  overflow-x: hidden;
+  overflow: hidden;
 }
 
 body {
-  overflow-x: hidden;
+  height: 100vh;
+  width: 100vw;
+  @include flexCenter();
 }
 
 input,
@@ -28,5 +30,47 @@ button {
   border: none;
   &:hover {
     cursor: pointer;
+  }
+}
+
+.App {
+  perspective: 1000px;
+}
+
+#sandbox {
+  height: 200vh;
+  width: 200vw;
+  position: relative;
+  background-size: 40px 40px;
+  border: 2px solid rgba(0, 0, 0, 0.126);
+  // &::before {
+  //   @include pseudoFormatTL($width: 1rem, $height: 1rem, $top: 50%, $left: 50%);
+  //   transform: translate(-50%, -50%);
+  //   content: "X";
+  // }
+}
+
+#interface {
+  @include absoluteCenter();
+  width: 100vw;
+  height: 100vh;
+}
+
+#zoom {
+  position: absolute;
+  bottom: 1rem;
+  right: 1rem;
+  display: flex;
+  gap: 0.5rem;
+  button {
+    width: 3rem;
+    height: 2rem;
+    border: 1px solid black;
+    background-color: white;
+    @include flexCenter();
+    transition: 0.3s ease-out;
+    &:hover {
+      background-color: rgb(190, 190, 190);
+    }
   }
 }
