@@ -27,22 +27,14 @@ function App() {
 
   // On drag end
   window.addEventListener("mouseup", () => {
-    if (sandbox.current === null) {
-      return;
+    if (sandbox.current) {
+      setIsDragging(false);
     }
-    // Save current position of sandbox; used as initial position for next drag
-    sandbox.current.dataset.currentx = sandbox.current.dataset.dx || "0";
-    sandbox.current.dataset.currenty = sandbox.current.dataset.dy || "0";
-    setIsDragging(false);
   });
   window.addEventListener("touchend", () => {
-    if (sandbox.current === null) {
-      return;
+    if (sandbox.current) {
+      setIsDragging(false);
     }
-    // Save current position of sandbox; used as initial position for next drag
-    sandbox.current.dataset.currentx = sandbox.current.dataset.dx || "0";
-    sandbox.current.dataset.currenty = sandbox.current.dataset.dy || "0";
-    setIsDragging(false);
   });
 
   // Drag handler
@@ -78,12 +70,12 @@ function App() {
         sandbox.current.dataset.dx = deltaPercentageX.toString();
         sandbox.current.dataset.dy = deltaPercentageY.toString();
 
-        // Smoothly animate sandbox to new position
+        // Zoom out and smoothly animate sandbox to new position
         sandbox.current.animate(
           {
             transform: `translate3d(${deltaPercentageX * 25}%, ${
               deltaPercentageY * 25
-            }%, ${zoom}px)`,
+            }%, ${Math.max(zoom - 500, -300)}px)`,
           },
           { duration: 800, fill: "forwards", easing: "ease-out" }
         );
@@ -108,19 +100,40 @@ function App() {
         sandbox.current.dataset.dx = deltaPercentageX.toString();
         sandbox.current.dataset.dy = deltaPercentageY.toString();
 
-        // Smoothly animate sandbox to new position
+        // Zoom out and smoothly animate sandbox to new position
         sandbox.current.animate(
           {
             transform: `translate3d(${deltaPercentageX * 25}%, ${
               deltaPercentageY * 25
-            }%, ${zoom}px)`,
+            }%, ${Math.max(zoom - 500, -300)}px)`,
           },
           { duration: 800, fill: "forwards", easing: "ease-out" }
         );
       };
     } else {
+      if (sandbox.current === null) {
+        return;
+      }
+      // Remove drag handlers
       window.onmousemove = null;
       window.ontouchmove = null;
+
+      // Save current drag offset; used as initial offset for next drag
+      sandbox.current.dataset.currentx = sandbox.current.dataset.dx || "0";
+      sandbox.current.dataset.currenty = sandbox.current.dataset.dy || "0";
+
+      // Smoothly zoom back in
+      const currentX = parseFloat(sandbox.current.dataset.currentx || "0");
+      const currentY = parseFloat(sandbox.current.dataset.currenty || "0");
+      const zoom = parseInt(sandbox.current.dataset.zoom || "0");
+      sandbox.current.animate(
+        {
+          transform: `translate3d(${currentX * 25}%, ${
+            currentY * 25
+          }%, ${zoom}px)`,
+        },
+        { duration: 600, fill: "forwards", easing: "ease-out" }
+      );
     }
   }, [isDragging]);
 
@@ -164,6 +177,9 @@ function App() {
   const zoomOutRef = useRef<HTMLButtonElement>(null);
   window.onkeydown = (e) => {
     if (zoomInRef.current === null || zoomOutRef.current === null) {
+      return;
+    }
+    if (isDragging) {
       return;
     }
 
