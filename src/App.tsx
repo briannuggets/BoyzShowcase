@@ -16,8 +16,28 @@ function App() {
     setIsDragging(true);
   });
 
+  window.addEventListener("touchstart", (e) => {
+    if (sandbox.current === null) {
+      return;
+    }
+    // Save initial position of mouse
+    sandbox.current.dataset.initialx = e.touches[0].clientX.toString();
+    sandbox.current.dataset.initialy = e.touches[0].clientY.toString();
+    setIsDragging(true);
+  });
+
   // On drag end
   window.addEventListener("mouseup", (e) => {
+    if (sandbox.current === null) {
+      return;
+    }
+    // Save current position of sandbox; used as initial position for next drag
+    sandbox.current.dataset.currentx = sandbox.current.dataset.dx || "0";
+    sandbox.current.dataset.currenty = sandbox.current.dataset.dy || "0";
+    setIsDragging(false);
+  });
+
+  window.addEventListener("touchend", (e) => {
     if (sandbox.current === null) {
       return;
     }
@@ -38,6 +58,38 @@ function App() {
       const currentX = parseFloat(sandbox.current.dataset.currentx || "0");
       const currentY = parseFloat(sandbox.current.dataset.currenty || "0");
       const zoom = parseInt(sandbox.current.dataset.zoom || "0");
+      window.ontouchmove = (e) => {
+        if (sandbox.current === null) {
+          return;
+        }
+
+        const dragSpeed = 2.5;
+        const maxDeltaX = window.innerWidth / dragSpeed;
+        const maxDeltaY = window.innerHeight / dragSpeed;
+
+        // Add current drag offset to previous drag offset
+        let deltaPercentageX =
+          (e.touches[0].clientX - initialX) / maxDeltaX + currentX;
+        let deltaPercentageY =
+          (e.touches[0].clientY - initialY) / maxDeltaY + currentY;
+
+        // Clamp values between -1 and 1
+        deltaPercentageX = Math.min(Math.max(deltaPercentageX, -1), 1);
+        deltaPercentageY = Math.min(Math.max(deltaPercentageY, -1), 1);
+
+        sandbox.current.dataset.dx = deltaPercentageX.toString();
+        sandbox.current.dataset.dy = deltaPercentageY.toString();
+
+        // Smoothly animate sandbox to new position
+        sandbox.current.animate(
+          {
+            transform: `translate3d(${deltaPercentageX * 25}%, ${
+              deltaPercentageY * 25
+            }%, ${zoom}px)`,
+          },
+          { duration: 800, fill: "forwards", easing: "ease-out" }
+        );
+      };
       window.onmousemove = (e) => {
         if (sandbox.current === null) {
           return;
@@ -70,6 +122,7 @@ function App() {
       };
     } else {
       window.onmousemove = null;
+      window.ontouchmove = null;
     }
   }, [isDragging]);
 
@@ -112,7 +165,7 @@ function App() {
   window.onkeydown = (e) => {
     if (e.key === "1" || e.key === "-") {
       zoom(false);
-    } else if (e.key === "2" || e.key === "+") {
+    } else if (e.key === "2" || e.key === "=") {
       zoom(true);
     }
   };
