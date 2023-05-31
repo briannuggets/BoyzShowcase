@@ -21,6 +21,7 @@ const Card: FC<CardProps> = ({
   id,
   drag,
 }) => {
+  // Attach svg filter to image
   const imageRef = useRef<HTMLImageElement>(null);
   useEffect(() => {
     if (imageRef.current) {
@@ -44,6 +45,7 @@ const Card: FC<CardProps> = ({
       return;
     }
 
+    // Activate title flicker animation
     if (titleRef.current) {
       titleRef.current.classList.add("active");
     }
@@ -81,6 +83,7 @@ const Card: FC<CardProps> = ({
     });
   };
 
+  // Swap images when card is clicked
   const [isAlt, setIsAlt] = useState(false);
   useEffect(() => {
     if (imageRef.current === null) {
@@ -94,6 +97,7 @@ const Card: FC<CardProps> = ({
     }
   }, [isAlt]);
 
+  // Wrap each character in a span for flicker animation
   const constructText = (text: string) => {
     const spans = [];
     for (let i = 0; i < text.length; i++) {
