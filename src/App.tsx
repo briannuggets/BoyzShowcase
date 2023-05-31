@@ -259,6 +259,27 @@ function App() {
       zoomOutRef.current.classList.remove("active");
       zoomInRef.current.classList.remove("active");
     };
+
+    // Flash zoom buttons on scroll
+    let timer: number = -1;
+    const handleWheel = () => {
+      if (zoomInRef.current === null || zoomOutRef.current === null) {
+        return;
+      }
+      if (timer !== -1) {
+        clearTimeout(timer);
+      }
+      zoomInRef.current.classList.add("flash");
+      zoomOutRef.current.classList.add("flash");
+      timer = setTimeout(() => {
+        if (zoomInRef.current === null || zoomOutRef.current === null) {
+          return;
+        }
+        zoomInRef.current.classList.remove("flash");
+        zoomOutRef.current.classList.remove("flash");
+      }, 500);
+    };
+    window.addEventListener("wheel", handleWheel, false);
   }, []);
 
   return (

@@ -101,6 +101,9 @@ button {
   button.active {
     background-color: rgb(190, 190, 190);
   }
+  button.flash {
+    background-color: yellow;
+  }
   button::before {
     @include flexCenter();
     content: "1";
