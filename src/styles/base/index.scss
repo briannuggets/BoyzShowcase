@@ -18,7 +18,7 @@ body {
   height: 100vh;
   width: 100vw;
   @include flexCenter();
-  background-color: black;
+  // background-color: black;
 }
 
 input,
@@ -43,20 +43,27 @@ button {
   height: 200vh;
   width: 200vw;
   position: relative;
-  background-image: url("../../assets/gradient.jpg");
-  background-position: 50% 50%;
-  background-size: cover;
-  -webkit-mask-image: linear-gradient(to right, black 1px, transparent 1px),
-    linear-gradient(to bottom, black 1px, transparent 1px);
-  mask-image: linear-gradient(to right, black 1px, transparent 1px),
-    linear-gradient(to bottom, black 1px, transparent 1px);
-  -webkit-mask-size: 4rem 4rem;
-  mask-size: 4rem 4rem;
+  @include flexCenter();
+  flex-wrap: wrap;
+  gap: 1rem;
   &:hover {
     cursor: grab;
   }
   &:active {
     cursor: grabbing;
+  }
+  &::before {
+    @include pseudoFormatTL();
+    background-image: url("../../assets/gradient.jpg");
+    background-position: 50% 50%;
+    background-size: cover;
+    -webkit-mask-image: linear-gradient(to right, black 1px, transparent 1px),
+      linear-gradient(to bottom, black 1px, transparent 1px);
+    mask-image: linear-gradient(to right, black 1px, transparent 1px),
+      linear-gradient(to bottom, black 1px, transparent 1px);
+    -webkit-mask-size: 4rem 4rem;
+    mask-size: 4rem 4rem;
+    z-index: -1;
   }
 }
 
@@ -103,9 +110,24 @@ button {
     border-radius: 50%;
     border: 1px solid black;
     border-style: dashed;
-    background-color: white;
+    background-color: rgba(255, 255, 255, 0.784);
   }
   button:nth-child(2)::before {
     content: "2";
+  }
+}
+
+.card {
+  height: 20rem;
+  width: 15rem;
+  border: 1px solid black;
+  border-radius: 0;
+  overflow: hidden;
+  user-select: none;
+  img {
+    @include imageFormat();
+  }
+  &:hover {
+    cursor: pointer;
   }
 }

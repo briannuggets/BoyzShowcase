@@ -1,41 +1,55 @@
-import React, { useRef, useState, useEffect } from "react";
+import { useRef, useState, useEffect } from "react";
 import { CiZoomIn, CiZoomOut } from "react-icons/ci";
+import Card from "./components/Card";
+import Card0 from "./assets/cards/0.jpg";
+import Card1 from "./assets/cards/1.jpg";
+import Card2 from "./assets/cards/2.jpg";
+import Card3 from "./assets/cards/3.jpg";
+import Card4 from "./assets/cards/4.jpg";
+import Card5 from "./assets/cards/5.jpg";
+import Card6 from "./assets/cards/6.jpg";
+import Card7 from "./assets/cards/7.jpg";
+import Card8 from "./assets/cards/8.jpg";
+import Card9 from "./assets/cards/9.jpg";
+import Card10 from "./assets/cards/10.jpg";
 
 function App() {
   const sandbox = useRef<HTMLDivElement>(null);
   const [isDragging, setIsDragging] = useState(false);
 
-  // On drag start
-  window.addEventListener("mousedown", (e) => {
-    if (sandbox.current === null) {
-      return;
-    }
-    // Save initial position of mouse
-    sandbox.current.dataset.initialx = e.clientX.toString();
-    sandbox.current.dataset.initialy = e.clientY.toString();
-    setIsDragging(true);
-  });
-  window.addEventListener("touchstart", (e) => {
-    if (sandbox.current === null) {
-      return;
-    }
-    // Save initial position of mouse
-    sandbox.current.dataset.initialx = e.touches[0].clientX.toString();
-    sandbox.current.dataset.initialy = e.touches[0].clientY.toString();
-    setIsDragging(true);
-  });
+  useEffect(() => {
+    // On drag start
+    window.addEventListener("mousedown", (e) => {
+      if (sandbox.current === null) {
+        return;
+      }
+      // Save initial position of mouse
+      sandbox.current.dataset.initialx = e.clientX.toString();
+      sandbox.current.dataset.initialy = e.clientY.toString();
+      setIsDragging(true);
+    });
+    window.addEventListener("touchstart", (e) => {
+      if (sandbox.current === null) {
+        return;
+      }
+      // Save initial position of mouse
+      sandbox.current.dataset.initialx = e.touches[0].clientX.toString();
+      sandbox.current.dataset.initialy = e.touches[0].clientY.toString();
+      setIsDragging(true);
+    });
 
-  // On drag end
-  window.addEventListener("mouseup", () => {
-    if (sandbox.current) {
-      setIsDragging(false);
-    }
-  });
-  window.addEventListener("touchend", () => {
-    if (sandbox.current) {
-      setIsDragging(false);
-    }
-  });
+    // On drag end
+    window.addEventListener("mouseup", () => {
+      if (sandbox.current) {
+        setIsDragging(false);
+      }
+    });
+    window.addEventListener("touchend", () => {
+      if (sandbox.current) {
+        setIsDragging(false);
+      }
+    });
+  }, []);
 
   // Drag handler
   useEffect(() => {
@@ -79,6 +93,16 @@ function App() {
           },
           { duration: 800, fill: "forwards", easing: "ease-out" }
         );
+
+        // Skew cards relative to drag direction
+        for (const child of sandbox.current.children) {
+          child.animate(
+            {
+              transform: `skewX(${deltaPercentageX * -7}deg)`,
+            },
+            { duration: 800, easing: "ease-out" }
+          );
+        }
       };
       window.onmousemove = (e) => {
         if (sandbox.current === null) {
@@ -109,6 +133,16 @@ function App() {
           },
           { duration: 800, fill: "forwards", easing: "ease-out" }
         );
+
+        // Skew cards relative to drag direction
+        for (const child of sandbox.current.children) {
+          child.animate(
+            {
+              transform: `skewX(${deltaPercentageX * -7}deg)`,
+            },
+            { duration: 800, easing: "ease-out", fill: "forwards" }
+          );
+        }
       };
     } else {
       if (sandbox.current === null) {
@@ -134,6 +168,14 @@ function App() {
         },
         { duration: 600, fill: "forwards", easing: "ease-out" }
       );
+
+      // Smoothly reset skew of cards
+      for (const child of sandbox.current.children) {
+        child.animate(
+          { transform: "skewX(0deg)" },
+          { duration: 400, easing: "ease-out", fill: "forwards" }
+        );
+      }
     }
   }, [isDragging]);
 
@@ -175,31 +217,33 @@ function App() {
   // Zoom keyboard shortcut with on-press indicator
   const zoomInRef = useRef<HTMLButtonElement>(null);
   const zoomOutRef = useRef<HTMLButtonElement>(null);
-  window.onkeydown = (e) => {
-    if (zoomInRef.current === null || zoomOutRef.current === null) {
-      return;
-    }
-    if (isDragging) {
-      return;
-    }
+  useEffect(() => {
+    window.onkeydown = (e) => {
+      if (zoomInRef.current === null || zoomOutRef.current === null) {
+        return;
+      }
+      if (isDragging) {
+        return;
+      }
 
-    // Light up button on key press
-    if (e.key === "1" || e.key === "-") {
-      zoomOutRef.current.classList.add("active");
-      zoom(false);
-    } else if (e.key === "2" || e.key === "=") {
-      zoomInRef.current.classList.add("active");
-      zoom(true);
-    }
-  };
-  window.onkeyup = () => {
-    if (zoomInRef.current === null || zoomOutRef.current === null) {
-      return;
-    }
-    // Remove button light on key release
-    zoomOutRef.current.classList.remove("active");
-    zoomInRef.current.classList.remove("active");
-  };
+      // Light up button on key press
+      if (e.key === "1" || e.key === "-") {
+        zoomOutRef.current.classList.add("active");
+        zoom(false);
+      } else if (e.key === "2" || e.key === "=") {
+        zoomInRef.current.classList.add("active");
+        zoom(true);
+      }
+    };
+    window.onkeyup = () => {
+      if (zoomInRef.current === null || zoomOutRef.current === null) {
+        return;
+      }
+      // Remove button light on key release
+      zoomOutRef.current.classList.remove("active");
+      zoomInRef.current.classList.remove("active");
+    };
+  }, []);
 
   return (
     <div className="App">
@@ -211,7 +255,19 @@ function App() {
         data-currenty="0"
         data-zoom="0"
         ref={sandbox}
-      ></div>
+      >
+        <Card name="sangyeon" src={Card0} />
+        <Card name="sangyeon" src={Card1} />
+        <Card name="sangyeon" src={Card2} />
+        <Card name="sangyeon" src={Card3} />
+        <Card name="sangyeon" src={Card4} />
+        <Card name="sangyeon" src={Card5} />
+        <Card name="sangyeon" src={Card6} />
+        <Card name="sangyeon" src={Card7} />
+        <Card name="sangyeon" src={Card8} />
+        <Card name="sangyeon" src={Card9} />
+        <Card name="sangyeon" src={Card10} />
+      </div>
       <div id="interface">
         <div id="zoom" className="interface-content">
           <button
