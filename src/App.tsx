@@ -256,17 +256,17 @@ function App() {
         data-zoom="0"
         ref={sandbox}
       >
-        <Card name="sangyeon" src={Card0} />
-        <Card name="sangyeon" src={Card1} />
-        <Card name="sangyeon" src={Card2} />
-        <Card name="sangyeon" src={Card3} />
-        <Card name="sangyeon" src={Card4} />
-        <Card name="sangyeon" src={Card5} />
-        <Card name="sangyeon" src={Card6} />
-        <Card name="sangyeon" src={Card7} />
-        <Card name="sangyeon" src={Card8} />
-        <Card name="sangyeon" src={Card9} />
-        <Card name="sangyeon" src={Card10} />
+        <Card name="sangyeon" src={Card0} id={0} drag={isDragging} />
+        <Card name="jacob" src={Card1} id={1} drag={isDragging} />
+        <Card name="younghoon" src={Card2} id={2} drag={isDragging} />
+        <Card name="hyunjae" src={Card3} id={3} drag={isDragging} />
+        <Card name="juyeon" src={Card4} id={4} drag={isDragging} />
+        <Card name="kevin" src={Card5} id={5} drag={isDragging} />
+        <Card name="chanhee" src={Card6} id={6} drag={isDragging} />
+        <Card name="changmin" src={Card7} id={7} drag={isDragging} />
+        <Card name="haknyeon" src={Card8} id={8} drag={isDragging} />
+        <Card name="sunwoo" src={Card9} id={9} drag={isDragging} />
+        <Card name="eric" src={Card10} id={10} drag={isDragging} />
       </div>
       <div id="interface">
         <div id="zoom" className="interface-content">
