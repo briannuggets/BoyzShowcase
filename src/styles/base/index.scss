@@ -48,6 +48,7 @@ button {
   @include flexCenter();
   flex-wrap: wrap;
   gap: 1rem;
+  overflow: hidden;
   &:hover {
     cursor: grab;
   }
@@ -59,14 +60,33 @@ button {
     background-image: url("../../assets/gradient.jpg");
     background-position: 50% 50%;
     background-size: cover;
-    -webkit-mask-image: linear-gradient(to right, black 1px, transparent 1px),
-      linear-gradient(to bottom, black 1px, transparent 1px);
-    mask-image: linear-gradient(to right, black 1px, transparent 1px),
-      linear-gradient(to bottom, black 1px, transparent 1px);
+    -webkit-mask-image: var(--mask-image);
+    mask-image: var(--mask-image);
     -webkit-mask-size: 4rem 4rem;
     mask-size: 4rem 4rem;
     z-index: -1;
   }
+}
+
+#grid {
+  @include absoluteFill();
+  user-select: none;
+  display: grid;
+  grid-template-columns: repeat(var(--columns), 1fr);
+  grid-template-rows: repeat(var(--rows), 1fr);
+  gap: 4px;
+}
+
+.tile {
+  width: var(--tile-size);
+  height: var(--tile-size);
+  background-color: white;
+  transition: 1s;
+}
+
+.tile.active {
+  transition: 0s;
+  opacity: 0;
 }
 
 #interface {
@@ -125,6 +145,7 @@ button {
 .card {
   height: 20rem;
   width: 15rem;
+  background-color: black;
   border: 1px solid black;
   border-radius: 0;
   overflow: hidden;
@@ -148,9 +169,14 @@ button {
   flex-direction: column;
   margin-top: 0.5rem;
   user-select: none;
+  background-color: black;
+  color: white;
   div {
     display: flex;
     justify-content: space-between;
+  }
+  span {
+    margin: 1px;
   }
 }
 

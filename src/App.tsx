@@ -1,5 +1,6 @@
 import { useRef, useState, useEffect } from "react";
 import { CiZoomIn, CiZoomOut } from "react-icons/ci";
+import Grid from "./components/Grid";
 import Card from "./components/Card";
 import Card0 from "./assets/cards/0.jpg";
 import Card1 from "./assets/cards/1.jpg";
@@ -109,16 +110,6 @@ function App() {
           },
           { duration: 800, fill: "forwards", easing: "ease-out" }
         );
-
-        // Skew cards relative to drag direction
-        for (const child of sandbox.current.children) {
-          child.animate(
-            {
-              transform: `skewX(${deltaPercentageX * -7}deg)`,
-            },
-            { duration: 800, easing: "ease-out" }
-          );
-        }
       };
       window.onmousemove = (e) => {
         if (sandbox.current === null) {
@@ -151,8 +142,8 @@ function App() {
         );
 
         // Skew cards relative to drag direction
-        for (const child of sandbox.current.children) {
-          child.animate(
+        for (let i = 1; i < sandbox.current.children.length; i++) {
+          sandbox.current.children[i].animate(
             {
               transform: `skewX(${deltaPercentageX * -7}deg)`,
             },
@@ -186,11 +177,13 @@ function App() {
       );
 
       // Smoothly reset skew of cards
-      for (const child of sandbox.current.children) {
-        child.animate(
-          { transform: "skewX(0deg)" },
-          { duration: 400, easing: "ease-out", fill: "forwards" }
-        );
+      if (!isMobile) {
+        for (const child of sandbox.current.children) {
+          child.animate(
+            { transform: "skewX(0deg)" },
+            { duration: 400, easing: "ease-out", fill: "forwards" }
+          );
+        }
       }
     }
   }, [isDragging]);
@@ -282,6 +275,21 @@ function App() {
     window.addEventListener("wheel", handleWheel, false);
   }, []);
 
+  const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  useEffect(() => {
+    if (sandbox.current === null) {
+      return;
+    }
+
+    const maskImage =
+      "linear-gradient(to right, black 2px, transparent 2px), linear-gradient(to bottom, black 2px, transparent 2px)";
+    if (isMobile) {
+      sandbox.current.style.setProperty("--mask-image", maskImage);
+    } else {
+      sandbox.current.style.setProperty("--mask-image", "none");
+    }
+  }, [isMobile]);
+
   return (
     <div className="App">
       <div
@@ -293,6 +301,7 @@ function App() {
         data-zoom="0"
         ref={sandbox}
       >
+        {isMobile ? null : <Grid />}
         <Card
           name="SANGYEON"
           position="MAIN VOCALIST"
