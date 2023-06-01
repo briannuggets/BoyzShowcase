@@ -1,6 +1,7 @@
 @import "./mixins";
 @import "./variables";
 @import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
+@import "../mobile";
 
 *,
 *::before,
@@ -15,7 +16,6 @@ html {
 }
 
 body {
-  overflow: hidden;
   height: 100vh;
   width: 100vw;
   @include flexCenter();
