@@ -20,7 +20,9 @@ body {
   width: 100vw;
   @include flexCenter();
   font-family: "Space Grotesk", sans-serif;
-  // background-color: black;
+  background-image: url("../../assets/gradient.jpg");
+  background-position: 50% 50%;
+  background-size: cover;
 }
 
 input,
@@ -47,6 +49,7 @@ button {
   position: relative;
   @include flexCenter();
   flex-wrap: wrap;
+  align-content: center;
   gap: 1rem;
   overflow: hidden;
   &:hover {
@@ -80,7 +83,7 @@ button {
 .tile {
   width: var(--tile-size);
   height: var(--tile-size);
-  background-color: white;
+  background-color: rgba(255, 255, 255, 0.5);
   transition: 1s;
 }
 
