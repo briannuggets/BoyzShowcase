@@ -1,7 +1,8 @@
 @import "./mixins";
 @import "./variables";
-@import url("https://fonts.googleapis.com/css2?family=Inter&family=Space+Grotesk&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Gloria+Hallelujah&family=Space+Grotesk&display=swap");
 @import "../mobile";
+@import "../positions";
 @import "../logo";
 
 *,
@@ -76,6 +77,15 @@ button {
   grid-template-columns: repeat(var(--columns), 1fr);
   grid-template-rows: repeat(var(--rows), 1fr);
   gap: 4px;
+  span {
+    pointer-events: none;
+    color: rgba(255, 255, 255, 0.2);
+    position: absolute;
+    font-family: "Gloria Hallelujah", cursive;
+    font-size: 7rem;
+    opacity: 0;
+    animation: fade-in 0.8s ease-out 3.2s forwards;
+  }
 }
 
 @keyframes spawn {
@@ -226,8 +236,10 @@ button {
 
 .card-container {
   width: fit-content;
-  position: relative;
+  position: absolute;
   pointer-events: all;
+  opacity: 0;
+  animation: fade-in 0.3s linear 3.2s forwards;
   .swap {
     position: absolute;
     top: 0;
@@ -244,7 +256,5 @@ button {
 
 #cards {
   @include absoluteFill();
-  @include flexCenter();
-  gap: 1rem;
   pointer-events: none;
 }

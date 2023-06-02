@@ -45,6 +45,11 @@ const Grid = () => {
 
   return (
     <div id="grid" draggable={false} ref={gridRef}>
+      <span className="grid-text">our life is so delicious</span>
+      <span className="grid-text">salty</span>
+      <span className="grid-text">sweet</span>
+      <span className="grid-text">tasty</span>
+      <span className="grid-text">spicy</span>
       {tiles}
     </div>
   );
