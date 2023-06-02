@@ -13,6 +13,12 @@
     mask-size: 4rem 4rem;
     z-index: -1;
   }
+  footer {
+    @include flexCenterColumn();
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
+    height: 8rem;
+    color: white;
+  }
 }
 
 #hero-mobile {
@@ -60,8 +66,40 @@
 }
 
 #cards-mobile {
-  @include flexCenterColumn();
+  margin: 5rem 1rem 2rem 1rem;
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: 1fr 1fr 1fr;
   .card-container {
     position: static;
+    width: 100%;
+  }
+  .card {
+    min-width: 100%;
+    height: 25rem;
+  }
+}
+
+// ------------------------ MEDIA QUERIES ------------------------ //
+
+@media screen and (max-width: 800px) {
+  #cards-mobile {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #cards-mobile {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+    .card {
+      height: 85vh;
+    }
+  }
+}
+
+@media screen and (max-width: 480px) {
+  #cards-mobile .card {
+    height: 80vh;
   }
 }

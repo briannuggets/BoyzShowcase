@@ -20,6 +20,10 @@ const Mobile = () => {
         </div>
       </section>
       <Cards isDragging={false} />
+      <footer>
+        <span>Code by Brian Nguyen</span>
+        <span>Use desktop for interactive experience</span>
+      </footer>
     </div>
   );
 };
