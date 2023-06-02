@@ -87,10 +87,10 @@ button {
   gap: 4px;
   span {
     pointer-events: none;
-    color: rgba(255, 255, 255, 0.2);
+    color: rgba(255, 255, 255, 0.23);
     position: absolute;
     font-family: "Gloria Hallelujah", cursive;
-    font-size: 7rem;
+    font-size: 4rem;
     opacity: 0;
     animation: fade-in 0.8s ease-out 3.2s forwards;
   }
