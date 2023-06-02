@@ -1,17 +1,67 @@
-.scrollable::before {
-  @include pseudoFormatTL();
-  background-image: url("../../assets/gradient.jpg");
-  background-position: 0% 50%;
-  background-size: cover;
-  -webkit-mask-image: linear-gradient(to right, black 2px, transparent 2px),
-    linear-gradient(to bottom, black 2px, transparent 2px);
-  mask-image: linear-gradient(to right, black 2px, transparent 2px),
-    linear-gradient(to bottom, black 2px, transparent 2px);
-  -webkit-mask-size: 4rem 4rem;
-  mask-size: 4rem 4rem;
-  z-index: -1;
+#grid-mobile {
+  position: relative;
+  &::before {
+    @include pseudoFormatTL();
+    background-image: url("../../assets/gradient.jpg");
+    background-position: 0% 50%;
+    background-size: cover;
+    -webkit-mask-image: linear-gradient(to right, black 2px, transparent 2px),
+      linear-gradient(to bottom, black 2px, transparent 2px);
+    mask-image: linear-gradient(to right, black 2px, transparent 2px),
+      linear-gradient(to bottom, black 2px, transparent 2px);
+    -webkit-mask-size: 4rem 4rem;
+    mask-size: 4rem 4rem;
+    z-index: -1;
+  }
+}
+
+#hero-mobile {
+  width: 100vw;
+  height: 100vh;
+  @include flexCenter();
+  position: relative;
+  a {
+    position: fixed;
+    bottom: auto;
+    left: auto;
+    top: 1rem;
+    right: 1rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+    backdrop-filter: blur(0.5rem);
+  }
+}
+
+@keyframes bounce {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-0.25rem);
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+#hero-prompt {
+  position: absolute;
+  padding-left: 0.25rem;
+  bottom: 1rem;
+  left: 1rem;
+  color: yellow;
+  background-color: rgba(0, 0, 0, 0.2);
+  font-size: 1.25rem;
+  @include flexCenter();
+  gap: 0.25rem;
+  svg {
+    animation: bounce 1.5s ease-in-out infinite;
+  }
 }
 
 #cards-mobile {
   @include flexCenterColumn();
+  .card-container {
+    position: static;
+  }
 }
