@@ -19,6 +19,9 @@ const Desktop = () => {
       if ((e.target as HTMLElement).closest(".card") !== null) {
         return;
       }
+      if ((e.target as HTMLElement).closest(".interface-content") !== null) {
+        return;
+      }
 
       // Save initial position of mouse
       sandbox.current.dataset.initialx = e.clientX.toString();
@@ -231,6 +234,14 @@ const Desktop = () => {
             <CiZoomIn size={25} />
           </button>
         </div>
+        <a
+          id="teaser"
+          className="interface-content"
+          href="https://www.youtube.com/watch?v=5bGIWUAq1SY"
+          target="_blank"
+        >
+          WATCH TEASER &#x2197;
+        </a>
       </div>
     </>
   );
