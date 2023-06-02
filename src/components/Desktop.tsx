@@ -45,6 +45,16 @@ const Desktop = () => {
       const currentX = parseFloat(sandbox.current.dataset.currentx || "0");
       const currentY = parseFloat(sandbox.current.dataset.currenty || "0");
       const zoom = parseInt(sandbox.current.dataset.zoom || "0");
+
+      // Zoom out on initial click
+      sandbox.current.animate(
+        {
+          transform: `translate3d(${currentX * 25}%, ${currentY * 25}%, ${
+            zoom - 300
+          }px)`,
+        },
+        { duration: 100, fill: "forwards", easing: "ease-out" }
+      );
       window.onmousemove = (e) => {
         if (sandbox.current === null) {
           return;
@@ -65,7 +75,7 @@ const Desktop = () => {
         sandbox.current.dataset.dx = deltaPercentageX.toString();
         sandbox.current.dataset.dy = deltaPercentageY.toString();
 
-        // Zoom out and smoothly animate sandbox to new position
+        // Animate sandbox to new position
         sandbox.current.animate(
           {
             transform: `translate3d(${deltaPercentageX * 25}%, ${
@@ -95,7 +105,7 @@ const Desktop = () => {
             currentY * 25
           }%, ${zoom}px)`,
         },
-        { duration: 600, fill: "forwards", easing: "ease-out" }
+        { duration: 200, fill: "forwards", easing: "ease-out" }
       );
     }
   }, [isDragging]);
@@ -200,7 +210,7 @@ const Desktop = () => {
       >
         <Grid />
         <Logo />
-        {/* <Cards isDragging={isDragging} /> */}
+        <Cards isDragging={isDragging} />
       </div>
       <div id="interface">
         <div id="zoom" className="interface-content">
