@@ -15,19 +15,24 @@
   }
   footer {
     @include flexCenterColumn();
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.8), transparent);
-    height: 8rem;
+    background: linear-gradient(to top, rgba(0, 0, 0, 1), transparent);
+    height: 16rem;
+    padding-bottom: 6rem;
     color: white;
   }
 }
 
 #hero-mobile {
   width: 100vw;
-  height: 100vh;
+  height: calc(100vh - 10rem);
   @include flexCenter();
   position: relative;
+  #logo-container {
+    opacity: 0;
+    animation: fade-in 1s ease-out forwards;
+  }
   a {
-    position: fixed;
+    position: absolute;
     bottom: auto;
     left: auto;
     top: 1rem;
@@ -35,6 +40,11 @@
     padding-top: 0.5rem;
     padding-bottom: 0.5rem;
     backdrop-filter: blur(0.5rem);
+  }
+  a,
+  #hero-prompt {
+    opacity: 0;
+    animation: fade-in 0.8s ease-out 0.8s forwards;
   }
 }
 
@@ -66,7 +76,7 @@
 }
 
 #cards-mobile {
-  margin: 5rem 1rem 2rem 1rem;
+  margin: 0.5rem 1rem 2rem 1rem;
   display: grid;
   gap: 1rem;
   grid-template-columns: 1fr 1fr 1fr;
@@ -77,6 +87,13 @@
   .card {
     min-width: 100%;
     height: 25rem;
+  }
+  .name,
+  .position {
+    padding-left: 0.5rem;
+  }
+  .year {
+    padding-right: 0.5rem;
   }
 }
 

@@ -58,7 +58,7 @@ button {
   @include flexCenter();
   overflow: hidden;
   opacity: 0;
-  animation: fade-in 1s ease-out forwards;
+  animation: fade-in 1s ease-out 0.2s forwards;
   &:hover {
     cursor: grab;
   }
