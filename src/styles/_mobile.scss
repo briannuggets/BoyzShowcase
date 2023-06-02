@@ -1,19 +1,17 @@
-.scrollable {
-  width: 100vw;
-  overflow: auto;
+.scrollable::before {
+  @include pseudoFormatTL();
+  background-image: url("../../assets/gradient.jpg");
+  background-position: 0% 50%;
+  background-size: cover;
+  -webkit-mask-image: linear-gradient(to right, black 2px, transparent 2px),
+    linear-gradient(to bottom, black 2px, transparent 2px);
+  mask-image: linear-gradient(to right, black 2px, transparent 2px),
+    linear-gradient(to bottom, black 2px, transparent 2px);
+  -webkit-mask-size: 4rem 4rem;
+  mask-size: 4rem 4rem;
+  z-index: -1;
+}
+
+#cards-mobile {
   @include flexCenterColumn();
-  gap: 2rem;
-  &::before {
-    @include pseudoFormatTL();
-    background-image: url("../../assets/gradient.jpg");
-    background-position: 0% 50%;
-    background-size: cover;
-    -webkit-mask-image: linear-gradient(to right, black 2px, transparent 2px),
-      linear-gradient(to bottom, black 2px, transparent 2px);
-    mask-image: linear-gradient(to right, black 2px, transparent 2px),
-      linear-gradient(to bottom, black 2px, transparent 2px);
-    -webkit-mask-size: 4rem 4rem;
-    mask-size: 4rem 4rem;
-    z-index: -1;
-  }
 }

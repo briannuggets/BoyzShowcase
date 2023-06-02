@@ -17,6 +17,7 @@ const Grid = () => {
         <div
           className="tile"
           key={i}
+          style={{ ["--spawn-delay" as string]: `${Math.random() * 1 + 1.5}s` }}
           onMouseEnter={(e) => {
             (e.target as HTMLElement).classList.add("active");
           }}
