@@ -31,6 +31,7 @@ const Cards: FC<CardsProps> = ({ isDragging }) => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
   const cardsRef = useRef<HTMLDivElement>(null);
 
+  // Remove fade-in animation on mobile
   useEffect(() => {
     if (cardsRef.current === null) {
       return;

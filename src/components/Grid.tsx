@@ -4,8 +4,10 @@ const Grid = () => {
   const [columns, setColumns] = useState(0);
   const [rows, setRows] = useState(0);
 
+  // Create a responsive grid of 4 * 16px tiles
   const tileSize = 4;
   const constructTiles = () => {
+    // Measure the amount of rows and columns needed to fill the screen
     const columns = Math.floor((2 * window.innerWidth) / (tileSize * 16)) + 1;
     const rows = Math.floor((2 * window.innerHeight) / (tileSize * 16)) + 1;
     setColumns(columns);
@@ -31,6 +33,7 @@ const Grid = () => {
     return tiles;
   };
 
+  // Update CSS variables when the screen size changes
   const gridRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     if (gridRef.current === null) {
