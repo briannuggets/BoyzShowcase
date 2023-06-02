@@ -1,7 +1,8 @@
 @import "./mixins";
 @import "./variables";
-@import url("https://fonts.googleapis.com/css2?family=Space+Grotesk&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Inter&family=Space+Grotesk&display=swap");
 @import "../mobile";
+@import "../logo";
 
 *,
 *::before,
@@ -48,9 +49,6 @@ button {
   width: 200vw;
   position: relative;
   @include flexCenter();
-  flex-wrap: wrap;
-  align-content: center;
-  gap: 1rem;
   overflow: hidden;
   &:hover {
     cursor: grab;
@@ -80,11 +78,20 @@ button {
   gap: 4px;
 }
 
+@keyframes spawn {
+  from {
+    background-color: transparent;
+  }
+  to {
+    background-color: rgba(255, 255, 255, 0.3);
+  }
+}
+
 .tile {
   width: var(--tile-size);
   height: var(--tile-size);
-  background-color: rgba(255, 255, 255, 0.5);
   transition: 1s;
+  animation: spawn 0.8s ease-out var(--spawn-delay) forwards;
 }
 
 .tile.active {
@@ -170,7 +177,7 @@ button {
 .title {
   display: flex;
   flex-direction: column;
-  margin-top: 0.5rem;
+  margin-top: 0.25rem;
   user-select: none;
   background-color: black;
   color: white;
@@ -218,7 +225,9 @@ button {
 }
 
 .card-container {
+  width: fit-content;
   position: relative;
+  pointer-events: all;
   .swap {
     position: absolute;
     top: 0;
@@ -231,4 +240,11 @@ button {
 
 .card-container:has(.card:hover) .swap {
   opacity: 1;
+}
+
+#cards {
+  @include absoluteFill();
+  @include flexCenter();
+  gap: 1rem;
+  pointer-events: none;
 }
