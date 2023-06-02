@@ -1,4 +1,4 @@
-import { FC } from "react";
+import { FC, useRef, useEffect } from "react";
 import Card from "./Card";
 import Card0 from "../assets/cards/0.jpg";
 import Card1 from "../assets/cards/1.jpg";
@@ -29,9 +29,22 @@ interface CardsProps {
 
 const Cards: FC<CardsProps> = ({ isDragging }) => {
   const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+  const cardsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (cardsRef.current === null) {
+      return;
+    }
+    if (isMobile) {
+      for (const card of cardsRef.current.children) {
+        (card as HTMLElement).style.animation = "none";
+        (card as HTMLElement).style.opacity = "1";
+      }
+    }
+  }, [isMobile]);
 
   return (
-    <div id={isMobile ? "cards-mobile" : "cards"}>
+    <div id={isMobile ? "cards-mobile" : "cards"} ref={cardsRef}>
       <Card
         name="SANGYEON"
         position="MAIN VOCALIST"
