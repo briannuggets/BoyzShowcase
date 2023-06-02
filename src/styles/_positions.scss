@@ -1,4 +1,4 @@
-.card-container {
+#cards > .card-container {
   &:nth-child(1) {
     top: 5%;
     left: 10%;
@@ -73,5 +73,86 @@
   &:nth-child(7) {
     top: 75%;
     left: 70%;
+  }
+}
+
+// ------------------------ MEDIA QUERIES ------------------------ //
+
+@media screen and (max-width: 1280px) {
+  #cards > .card-container:nth-child(3) {
+    top: 4%;
+    left: 46%;
+  }
+  #cards > .card-container:nth-child(4) {
+    top: 11%;
+    left: 70%;
+  }
+  #cards > .card-container:nth-child(5) {
+    top: 22%;
+    left: 85%;
+  }
+  #cards > .card-container:nth-child(6) {
+    bottom: 6%;
+    left: 87%;
+  }
+  #cards > .card-container:nth-child(7) {
+    bottom: 9%;
+    left: 18%;
+  }
+  #cards > .card-container:nth-child(8) {
+    bottom: 3%;
+    left: 55%;
+  }
+  #cards > .card-container:nth-child(9) {
+    bottom: 13%;
+    left: 72%;
+  }
+  #cards > .card-container:nth-child(10) {
+    bottom: 6%;
+    left: 37%;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  #cards > .card-container:nth-child(6) {
+    bottom: 6%;
+    left: 80%;
+  }
+  #cards > .card-container:nth-child(7) {
+    bottom: 9%;
+    left: 9%;
+  }
+  #cards > .card-container:nth-child(8) {
+    bottom: 3%;
+    left: 45%;
+  }
+  #cards > .card-container:nth-child(9) {
+    bottom: 10%;
+    left: 61%;
+  }
+  #cards > .card-container:nth-child(10) {
+    bottom: 6%;
+    left: 27%;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  #cards .card {
+    height: 18rem;
+    width: 13rem;
+  }
+}
+
+@media screen and (max-width: 720px) {
+  #cards .card {
+    height: 16rem;
+    width: 11rem;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  #cards .card {
+    height: 15rem;
+    width: 10rem;
   }
 }

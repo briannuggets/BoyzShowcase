@@ -72,3 +72,11 @@
     animation: pulse 1.4s ease-in-out 2s infinite alternate;
   }
 }
+
+// ---------------- MEDIA QUERIES ---------------- //
+
+@media screen and (max-width: 720px) {
+  #logo-container {
+    transform: scale(1.5) !important;
+  }
+}
