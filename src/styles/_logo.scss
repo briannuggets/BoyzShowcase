@@ -7,19 +7,11 @@
   }
 }
 
-@keyframes fade-in {
-  to {
-    opacity: 1;
-  }
-}
-
 #logo-container {
   width: 20.8rem;
   height: 6rem;
   position: relative;
   transform: scale(2) !important;
-  opacity: 0;
-  animation: fade-in 0.8s ease-out forwards;
   &::before,
   &::after {
     font-size: 0.8rem;
@@ -27,12 +19,12 @@
     color: white;
   }
   &::before {
-    content: "THE BOYZ";
+    content: "THE BOYZ FULL ALBUM";
     top: -2rem;
     left: 0;
   }
   &::after {
-    content: "COMEBACK MAY 31ST";
+    content: "18:00 KST JUNE 13";
     bottom: -2rem;
     right: 0;
   }

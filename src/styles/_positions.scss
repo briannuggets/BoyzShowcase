@@ -48,7 +48,7 @@
 .grid-text {
   &:nth-child(1) {
     bottom: 3%;
-    left: 20%;
+    left: 10%;
   }
   &:nth-child(2) {
     top: 3%;
@@ -60,10 +60,18 @@
   }
   &:nth-child(4) {
     top: 50%;
-    left: 70%;
+    left: 75%;
   }
   &:nth-child(5) {
     top: 40%;
     left: 10%;
+  }
+  &:nth-child(6) {
+    top: 70%;
+    left: 30%;
+  }
+  &:nth-child(7) {
+    top: 75%;
+    left: 70%;
   }
 }
