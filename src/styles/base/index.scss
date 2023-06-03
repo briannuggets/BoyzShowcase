@@ -80,7 +80,7 @@ button {
 
 #grid {
   @include absoluteFill();
-  user-select: none;
+  @include userSelectNone();
   display: grid;
   grid-template-columns: repeat(var(--columns), 1fr);
   grid-template-rows: repeat(var(--rows), 1fr);
@@ -196,7 +196,6 @@ button {
   border: 1px solid black;
   border-radius: 0;
   overflow: hidden;
-  user-select: none;
   img {
     @include imageFormat();
     transition: 0.4s ease-out;
@@ -215,7 +214,6 @@ button {
   display: flex;
   flex-direction: column;
   margin-top: 0.25rem;
-  user-select: none;
   background-color: black;
   color: white;
   div {
@@ -283,5 +281,6 @@ button {
 
 #cards {
   @include absoluteFill();
+  @include userSelectNone();
   pointer-events: none;
 }
