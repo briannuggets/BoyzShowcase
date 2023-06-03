@@ -5,7 +5,8 @@ const Grid = () => {
   const [rows, setRows] = useState(0);
 
   // Create a responsive grid of 4 * 16px tiles
-  const tileSize = 4;
+  const viewportSize = window.innerWidth * window.innerHeight;
+  const tileSize = viewportSize < 1280000 ? 4 : 8; // Performance optimization for larger viewports
   const constructTiles = () => {
     // Measure the amount of rows and columns needed to fill the screen
     const columns = Math.floor((2 * window.innerWidth) / (tileSize * 16)) + 1;
