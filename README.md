@@ -14,3 +14,6 @@ Life is Delicious is a promotional website dedicated to showcasing the South Kor
 
 ## Usage
 The website can accessed by cloning the repository and running npm install > npm run dev. Alternatively, the site can found at [this url](https://lifeisdelicious.netlify.app/).
+
+## Contact
+If you have any questions or inquiries regarding this website, please feel free to contact the repository owner at brianwindev@gmail.com.
