@@ -1,4 +1,4 @@
-# The Boyz "Delicious" Promotion
+# [The Boyz "Delicious" Promotion](https://lifeisdelicious.netlify.app/)
 
 Life is Delicious is a promotional website dedicated to showcasing the South Korean K-pop boy group, The Boyz, and their latest album titled "Delicious." The website features concept photos, member information, track titles, and a link to the video teaser, providing fans and visitors with comprehensive details about the album and its contents.
 
